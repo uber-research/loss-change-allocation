@@ -34,7 +34,7 @@ def make_parser():
     parser.add_argument('--init_weights_h5', type=str, required=False)
 
     # model architecture
-    parser.add_argument('--arch', type=str, default='fc', choices=('fc', 'fc_mask', 'conv2_mask', 'conv4_mask', 
+    parser.add_argument('--arch', type=str, default='fc', choices=('fc', 'fc_mask', 'conv2_mask', 'conv4_mask',
         'conv6_mask', 'fc_cust', 'lenet', 'allcnn', 'resnet', 'vgg'), help='network architecture')
     parser.add_argument('--num_layers', type=int, default=3, help='number of layers for cifar fc')
 
@@ -103,7 +103,7 @@ def define_training(model, args):
         optimizer = tf.train.AdamOptimizer(input_lr)
     model.a('optimizer', optimizer)
 
-    # This adds prob, cross_ent, loss_cross_ent, class_prediction, 
+    # This adds prob, cross_ent, loss_cross_ent, class_prediction,
     # prediction_correct, accuracy, loss, (loss_reg) in tf_nets/losses.py
     add_classification_losses(model, model.input_labels)
 
@@ -199,7 +199,7 @@ def eval_on_entire_dataset(sess, model, input_x, input_y, dim_sum, batch_size, t
                 'loss_no_reg': model.loss_cross_ent}
 
         result_dict = sess_run_dict(sess, fetch_dict, feed_dict={
-            model.input_images: input_x[s_start:s_end], 
+            model.input_images: input_x[s_start:s_end],
             model.input_labels: input_y[s_start:s_end],
             learning_phase(): 0,
             batchnorm_learning_phase(): 1}) # do not use nor update moving averages
@@ -363,7 +363,7 @@ def main():
     if test_y.shape[0] % args.test_batch_size != 0:
         print("WARNING batch size doesn't divide test set evenly")
 
-    # build model 
+    # build model
     if args.arch == 'fc':
         model = network_builders.build_network_fc(args)
     elif args.arch == 'fc_cust':

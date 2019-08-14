@@ -83,7 +83,7 @@ def define_training(model, args):
         optimizer = tf.train.AdamOptimizer(input_lr)
     model.a('optimizer', optimizer)
 
-    # This adds prob, cross_ent, loss_cross_ent, class_prediction, 
+    # This adds prob, cross_ent, loss_cross_ent, class_prediction,
     # prediction_correct, accuracy, loss, (loss_reg) in tf_nets/losses.py
     add_classification_losses(model, model.input_labels)
     model.a('train_step', optimizer.minimize(model.loss))
@@ -133,7 +133,7 @@ def get_gradients_and_eval(sess, model, input_x, input_y, dim_sum, batch_size, g
             fetch_dict['gradients'] = model.grads_to_compute
 
         result_dict = sess_run_dict(sess, fetch_dict, feed_dict={
-            model.input_images: input_x[s_start:s_end], 
+            model.input_images: input_x[s_start:s_end],
             model.input_labels: input_y[s_start:s_end],
             learning_phase(): 0,
             batchnorm_learning_phase(): 1})
@@ -185,7 +185,7 @@ def run_thread(gpu, iters_to_calc, all_weights, shapes, input_data, dim_sum, arg
     # each process writes to a different variable in the file
     grads_train_key = 'grads_train_{}'.format(gpu)
     grads_test_key = 'grads_test_{}'.format(gpu)
-    
+
     # build model for this process/device
     with tf.device('/device:GPU:{}'.format(gpu)):
         if args.arch == 'fc':
@@ -371,10 +371,10 @@ def main():
     for gpu in range(args.num_gpus):
         # each process writes to a different variable in the file
         dsets['grads_train_{}'.format(gpu)] = hf_grads.create_dataset(
-            'grads_train_{}'.format(gpu), (len(iters_to_calc[gpu]) * args.default_num_splits + 1, dim_sum), 
+            'grads_train_{}'.format(gpu), (len(iters_to_calc[gpu]) * args.default_num_splits + 1, dim_sum),
             maxshape=(None, dim_sum), dtype='f4', compression='gzip')
         dsets['grads_test_{}'.format(gpu)] = hf_grads.create_dataset(
-            'grads_test_{}'.format(gpu), (len(iters_to_calc[gpu]) * args.default_num_splits + 1, dim_sum), 
+            'grads_test_{}'.format(gpu), (len(iters_to_calc[gpu]) * args.default_num_splits + 1, dim_sum),
             maxshape=(None, dim_sum), dtype='f4', compression='gzip')
 
         if args.num_gpus > 1:
