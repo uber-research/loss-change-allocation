@@ -1,10 +1,10 @@
-# Who Learns? Decomposing Learning into Per-Parameter Loss Contribution
+# LCA: Loss Change Allocation for Neural Network Training
 
 ## Authors
 Janice Lan, Rosanne Liu, Hattie Zhou, Jason Yosinski
 
 ## Introduction
-This codebase implements the experiments in Who Learns? Decomposing Learning into Per-Parameter Loss Contribution.
+This codebase implements the experiments in LCA: Loss Change Allocation for Neural Network Training
 
 ## Codebase structure
 
