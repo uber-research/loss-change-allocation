@@ -181,7 +181,6 @@ def build_resnet(args):
         Dense(10, kernel_initializer=he_normal, activation=None, kernel_regularizer=l2reg(args.l2_special), name='fc_last')
     ])
 
-
 # blocks used as part of a SequentialNetwork
 class ResidualBlock(Layers):
     # based on https://github.com/keras-team/keras/blob/master/examples/cifar10_resnet.py

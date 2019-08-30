@@ -19,21 +19,15 @@ import time
 import h5py
 import argparse
 import os
-import sys
-lab_root = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', '..')
-sys.path.insert(1, lab_root)
 
 import network_builders
-import masked_networks
 from tf_plus import BatchNormalization, Lambda, Dropout
 from tf_plus import Conv2D, MaxPooling2D, Flatten, Dense, he_normal, relu, Activation
 from tf_plus import Layers, SequentialNetwork, l2reg, PreprocessingLayers
 from tf_plus import learning_phase, batchnorm_learning_phase
-from exp.tf_nets.losses import add_classification_losses
+from tf_nets.losses import add_classification_losses
 from brook.tfutil import hist_summaries_train, get_collection_intersection, get_collection_intersection_summary, log_scalars, sess_run_dict
 from brook.tfutil import summarize_weights, summarize_opt, tf_assert_all_init, tf_get_uninitialized_variables, add_grad_summaries
-
-from IPython import embed
 
 def make_parser():
     parser = argparse.ArgumentParser()
@@ -44,8 +38,8 @@ def make_parser():
     parser.add_argument('--init_weights_h5', type=str, required=False)
 
     # model architecture
-    parser.add_argument('--arch', type=str, default='fc', choices=('fc', 'fc_mask', 'conv2_mask', 'conv4_mask',
-        'conv6_mask', 'fc_cust', 'lenet', 'allcnn', 'resnet', 'vgg'), help='network architecture')
+    parser.add_argument('--arch', type=str, default='fc', choices=('fc', 'fc_cust', 'lenet', 'allcnn',
+        'resnet', 'vgg'), help='network architecture')
     parser.add_argument('--num_layers', type=int, default=3, help='number of layers for cifar fc')
 
     # training params
@@ -69,7 +63,7 @@ def make_parser():
     parser.add_argument('--log_every', type=int, default=5, help='save tb batch acc/loss every n iterations')
     parser.add_argument('--save_weights', action='store_true', help='save weights to file')
     parser.add_argument('--save_training_grads', action='store_true', help='save mini-batch gradients to file')
-    parser.add_argument('--save_every', type=int, default=1, help='save gradients every n iterations (averaged)') # kinda deprecated
+    parser.add_argument('--save_every', type=int, default=1, help='save gradients every n iterations (averaged)') # deprecated
 
     # special configs for side experiments
     parser.add_argument('--l2_special', type=float, default=0, help='only used for side resnet experiments')

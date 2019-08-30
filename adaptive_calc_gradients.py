@@ -18,18 +18,15 @@ import time
 import h5py
 import argparse
 import os
-import sys
 from ast import literal_eval
 from multiprocessing.pool import ThreadPool
-lab_root = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', '..')
-sys.path.insert(1, lab_root)
 
 import network_builders
 from tf_plus import BatchNormalization, Lambda, Dropout
 from tf_plus import Conv2D, MaxPooling2D, Flatten, Dense, he_normal, relu, Activation
 from tf_plus import Layers, SequentialNetwork, l2reg, PreprocessingLayers
 from tf_plus import learning_phase, batchnorm_learning_phase
-from exp.tf_nets.losses import add_classification_losses
+from tf_nets.losses import add_classification_losses
 from brook.tfutil import hist_summaries_train, get_collection_intersection, get_collection_intersection_summary, log_scalars, sess_run_dict
 from brook.tfutil import summarize_weights, summarize_opt, tf_assert_all_init, tf_get_uninitialized_variables, add_grad_summaries
 
