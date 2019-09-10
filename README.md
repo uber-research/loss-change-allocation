@@ -1,14 +1,19 @@
-# LCA: Loss Change Allocation for Neural Network Training
-
-## Authors
-Janice Lan, Rosanne Liu, Hattie Zhou, Jason Yosinski
+# Loss Change Allocation
 
 ## Introduction
-This codebase implements the experiments in LCA: Loss Change Allocation for Neural Network Training
+This repository contains source code for the experiments in [LCA: Loss Change Allocation for Neural Network Training](https://arxiv.org/abs/1909.01440) (to be presented at NeurIPS 2019) by Janice Lan, Rosanne Liu, Hattie Zhou, and Jason Yosinski.
+
+```
+@inproceedings{lan-2019-loss-change-allocation,
+  title={LCA: Loss Change Allocation for Neural Network Training},
+  author={Janice Lan and Rosanne Liu and Hattie Zhou and Jason Yosinski},
+  booktitle={Advances in Neural Information Processing Systems},
+  year={2019}
+}
+```
 
 ## Codebase structure
 
-* `data/download_mnist.py` downloads MNIST data and splits it into train, val, and test
 * `train.py` trains a model and saves weights at every iteration, using architectures defined in `network_builders.py`
 * `adaptive_calc_gradients.py` calculates gradients used for LC, based on saved weights
 * `save_lc_stream.py` calculates LC for runs where gradients or weights don't fit into memory
