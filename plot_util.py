@@ -28,8 +28,6 @@ from scipy.spatial import distance
 from scipy.ndimage import gaussian_filter1d
 from scipy.stats import dweibull
 from ast import literal_eval
-from IPython import embed
-import pdb
 
 ######################################## handling large matrices ########################################
 

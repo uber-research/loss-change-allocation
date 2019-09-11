@@ -1,3 +1,6 @@
 # Python
 *.pyc
 *.swp
+
+# data files
+*.h5

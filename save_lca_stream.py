@@ -20,12 +20,7 @@ import time
 from ast import literal_eval
 import sys
 
-lab_root = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', '..')
-sys.path.insert(1, lab_root)
-
 from general.util import mkdir_p
-import matplotlib
-matplotlib.use('Agg')
 import plot_util as util
 
 def make_parser():
