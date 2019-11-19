@@ -78,7 +78,6 @@ def make_parser():
     parser = argparse.ArgumentParser()
     # inputs
     parser.add_argument('--data_dir', type=str, required=True)
-
     return parser
 
 ################# model setup, after architecture is already created
@@ -328,6 +327,7 @@ def main():
 
     if args.tf_seed != -1:
         tf.random.set_random_seed(args.tf_seed)
+
     if not args.no_shuffle and args.shuffle_seed != -1:
         np.random.seed(args.shuffle_seed)
 
@@ -375,7 +375,7 @@ def main():
         validation_split=0.20)
 
     train_generator = train_datagen.flow_from_dataframe(dataframe=df_train,
-        directory= dir_path+TRAIN_DIR,
+        directory= args.data_dir + TRAIN_DIR,
         x_col="id_code",
         y_col="diagnosis",
         batch_size=BATCH_SIZE,
@@ -387,7 +387,7 @@ def main():
         )
 
     valid_generator = train_datagen.flow_from_dataframe(dataframe=df_train,
-        directory= dir_path+TRAIN_DIR,
+        directory= args.data_dir + TRAIN_DIR,
         x_col="id_code",
         y_col="diagnosis",
         batch_size=BATCH_SIZE,
@@ -420,11 +420,11 @@ def main():
     model.compile(optimizer=RMSprop(), loss='categorical_crossentropy', metrics=['accuracy'])
 
     early_stop = EarlyStopping(monitor='val_loss',
-                           min_delta=0.0001,
-                           patience=3,
-                           verbose=1,
-                           mode='auto'
-                          )
+                               min_delta=0.0001,
+                               patience=3,
+                               verbose=1,
+                               mode='auto'
+                              )
 
     # Reducing the Learning Rate if result is not improving.
     reduce_lr = ReduceLROnPlateau(monitor='val_loss',
@@ -472,9 +472,10 @@ def main():
 
     #Run validation:
     (eval_loss, eval_accuracy) = tqdm(
-    model.evaluate_generator(generator=valid_generator, steps=NUM_VALID_STEPS, pickle_safe=False))
-    print("[INFO] accuracy: {:.2f}%".format(eval_accuracy * 100))
-    print("[INFO] Loss: {}".format(eval_loss))
+        model.evaluate_generator(generator=valid_generator, steps=NUM_VALID_STEPS, pickle_safe=False))
+        print("[INFO] accuracy: {:.2f}%".format(eval_accuracy * 100))
+        print("[INFO] Loss: {}".format(eval_loss)
+        )
 
     # init_model(model, args)
     # define_training(model, args)
