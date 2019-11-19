@@ -325,11 +325,14 @@ def main():
     parser = make_parser()
     args = parser.parse_args()
 
-    if args.tf_seed != -1:
-        tf.random.set_random_seed(args.tf_seed)
-
-    if not args.no_shuffle and args.shuffle_seed != -1:
-        np.random.seed(args.shuffle_seed)
+    # if args.tf_seed != -1:
+    #     tf.random.set_random_seed(args.tf_seed)
+    #
+    # if not args.no_shuffle and args.shuffle_seed != -1:
+    #     np.random.seed(args.shuffle_seed)
+    SEED = 7
+    np.random.seed(SEED)
+    set_random_seed(SEED)
 
     #Define params for model:
 
@@ -383,7 +386,7 @@ def main():
         target_size=(IMG_DIM, IMG_DIM),
         subset='training',
         shaffle=True,
-        seed=SEED,
+        seed = SEED
         )
 
     valid_generator = train_datagen.flow_from_dataframe(dataframe=df_train,
@@ -395,7 +398,7 @@ def main():
         target_size=(IMG_DIM, IMG_DIM),
         subset='validation',
         shaffle=True,
-        seed=SEED
+        seed = SEED
         )
 
 
