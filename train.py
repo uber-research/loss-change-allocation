@@ -473,9 +473,9 @@ def main():
     #Run validation:
     (eval_loss, eval_accuracy) = tqdm(
         model.evaluate_generator(generator=valid_generator, steps=NUM_VALID_STEPS, pickle_safe=False))
-        print("[INFO] accuracy: {:.2f}%".format(eval_accuracy * 100))
-        print("[INFO] Loss: {}".format(eval_loss)
-        )
+
+    print("[INFO] accuracy: {:.2f}%".format(eval_accuracy * 100))
+    print("[INFO] Loss: {}".format(eval_loss))
 
     # init_model(model, args)
     # define_training(model, args)
