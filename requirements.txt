@@ -6,6 +6,6 @@ numpy==1.16.4
 orderedset==2.0.1
 scipy==1.2.1
 tensorboard==1.13.1
-tensorflow==1.13.1
+tensorflow==2.7.2
 tensorflow-estimator==1.13.0
 tensorflow-probability==0.6.0
